@@ -6,6 +6,8 @@
 
 {% block active_tab_pending %} active {% endblock %}
 
+{% block page_del %} pending {% endblock %}
+
 {% block content %}
 <div class="d-flex justify-content-between mb-2">
   <h2>Pending</h2>
@@ -51,11 +53,11 @@
           <td>
             <form action="{{ url_for('task_options') }}" method="POST">
               <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                  <input type="hidden" name="id" value="{{ t.id }}">
-                  <button type="submit" name="btn" value="complete" class="btn btn-success">✅</button>
-                  <button type="submit" name="btn" value="edit" class="btn btn-warning">✏</button>
-                  <button type="submit" name="btn" value="delete" class="btn btn-danger">🗑️</button>
+                <button type="submit" name="btn" value="complete" class="btn btn-success">✅</button>
+                <button type="submit" name="btn" value="edit" class="btn btn-warning">✏</button>
+                <button type="submit" name="btn" value="delete" class="btn btn-danger">🗑️</button>
               </div>
+              <input type="hidden" name="id" value="{{ t.id }}">
             </form>
           </td>
           <td>{{ t.name }}</td>

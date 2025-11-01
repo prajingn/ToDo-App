@@ -23,9 +23,15 @@ def add_task():
 
 @app.route("/clear_all", methods=["POST"])
 def clear_all():
-    db.drop_all()
-    db.create_all()
-    return redirect(url_for("pending"))
+    page = request.form["page"].strip()
+    if page == "pending":
+        tasks=Task.query.filter(Task.is_complete == False).all()
+    elif page == "complete":
+        tasks=Task.query.filter(Task.is_complete == True).all()
+    for t in tasks:
+        db.session.delete(t)
+    db.session.commit()
+    return redirect(url_for(page))
 
 @app.route("/task_options", methods=["GET", "POST"])
 def task_options():
