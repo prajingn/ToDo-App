@@ -12,7 +12,7 @@
   <h5>{{ curr_date }}</h5>
 </div>
 
-<table class="table table-hover">
+<table class="table table-hover table-striped">
   <thead>
     <tr>
       <th scope="col">Action</th>
@@ -23,7 +23,7 @@
     </tr>
   </thead>
   <tbody class="table-hover">
-    <form action="{{ url_for('add_task') }}" method="POST">
+    <form action="{{ url_for('add_task') }}" method="POST" class="mb-100">
         <tr>
           <td>
             <button type="submit" class="btn btn-primary">Add Task</button>
@@ -32,13 +32,13 @@
             <input type="text" name="name" class="form-control" placeholder="Task name" required>
           </td>
           <td>
-            <input type="text" name="details" class="form-control" placeholder="Task Description" required>
+            <input type="text" name="details" class="form-control" placeholder="Task Description">
           </td>
           <td>
               <select id="priority" name="priority" class="form-select">
-                <option value="0">Low</option>
-                <option value="1">Medium</option>
-                <option value="2">High</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
               </select>
           </td>
           <td>
@@ -46,6 +46,24 @@
           </td>
         </tr>
     </form>
+        {% for t in tasks %}
+        <tr>
+          <td>
+            <form action="{{ url_for('task_options') }}" method="POST">
+              <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                  <input type="hidden" name="id" value="{{ t.id }}">
+                  <button type="submit" name="btn" value="complete" class="btn btn-success">✅</button>
+                  <button type="submit" name="btn" value="edit" class="btn btn-warning">✏</button>
+                  <button type="submit" name="btn" value="delete" class="btn btn-danger">🗑️</button>
+              </div>
+            </form>
+          </td>
+          <td>{{ t.name }}</td>
+          <td>{{ t.details }}</td>
+          <td>{{ t.priority }}</td>
+          <td>{{ t.due }}</td>
+        </tr>
+        {% endfor %}
   </tbody>
 </table>
 {% endblock %}

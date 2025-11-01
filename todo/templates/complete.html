@@ -15,7 +15,6 @@
 <table class="table table-hover table-striped">
   <thead>
     <tr>
-      <th scope="col">Action</th>
       <th scope="col">Task</th>
       <th scope="col">Description</th>
       <th scope="col">Priority</th>
@@ -23,6 +22,16 @@
     </tr>
   </thead>
   <tbody class="table-hover">
+
+    {% for t in tasks %}
+    <tr>
+      <td>{{ t.name }}</td>
+      <td>{{ t.details }}</td>
+      <td>{{ t.priority }}</td>
+      <td>{{ t.due }}</td>
+    </tr>
+    {% endfor %}
+
   </tbody>
 </table>
 {% endblock %}

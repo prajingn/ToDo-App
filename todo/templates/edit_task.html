@@ -1,0 +1,52 @@
+{% extends "base.html"%}
+
+{% block title %}
+  Edit
+{% endblock %}
+
+{% block active_tab_pending %} active {% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between mb-2">
+  <h2>Edit</h2>
+  <h5>{{ curr_date }}</h5>
+</div>
+
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Action</th>
+      <th scope="col">Task</th>
+      <th scope="col">Description</th>
+      <th scope="col">Priority</th>
+      <th scope="col">Due</th>
+    </tr>
+  </thead>
+  <tbody class="table-hover">
+    <form action="{{ url_for('edit_task', id=task_id) }}" method="POST" class="mb-100">
+        <tr>
+          <td>
+            <button type="submit" class="btn btn-primary">Edit Task</button>
+          </td>
+          <td>
+            <input type="text" name="name" class="form-control" placeholder="{{ name }}" required>
+          </td>
+          <td>
+            <input type="text" name="details" class="form-control" placeholder="{{ details }}">
+          </td>
+          <td>
+              <select id="priority" name="priority" class="form-select">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </select>
+          </td>
+          <td>
+            <input type="date" name="due" class="form-control" min="{{ date.today() }}" required>
+          </td>
+        </tr>
+    </form>
+  </tbody>
+</table>
+
+{% endblock %}
